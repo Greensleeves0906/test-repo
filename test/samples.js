@@ -12,15 +12,15 @@ define(['./samples-all.generated'], function (ALL_SAMPLES) {
 	var modesIds = monaco.languages.getLanguages().map(function (language) { return language.id; });
 	modesIds.sort();
 
-	modesIds.forEach(function (modeId) {
-		samples.push({
-			name: 'sample - ' + modeId,
-			mimeType: modeId,
-			loadText: function () {
-				return Promise.resolve(XHR_SAMPLES['sample.' + modeId + '.txt']);
-			}
-		});
-	});
+	// modesIds.forEach(function (modeId) {
+	// 	samples.push({
+	// 		name: 'sample - ' + modeId,
+	// 		mimeType: modeId,
+	// 		loadText: function () {
+	// 			return Promise.resolve(XHR_SAMPLES['sample.' + modeId + '.txt']);
+	// 		}
+	// 	});
+	// });
 
 	function addXHRSample(name, modelUrl, mimeType, textModifier) {
 		textModifier = textModifier || function (text) { return text; };
@@ -78,6 +78,16 @@ define(['./samples-all.generated'], function (ALL_SAMPLES) {
 		newLines = newLines.slice(0, problemIsAt);
 		return newLines.join('\n');
 	});
+
+	function addStringPowerXHRSample2(name, modelUrl, mimeType, power) {
+		addXHRSample(name, modelUrl, mimeType, function (text) {
+			var result = text;
+			for (var i = 0; i < power; ++i) {
+				result += "\n" + result;
+			}
+			return result;
+		});
+	}
 
 	addSample('Z___special-chars', 'text/plain', [
 		"// single line \u000D comment", // Carriage return
@@ -225,18 +235,6 @@ define(['./samples-all.generated'], function (ALL_SAMPLES) {
 	})());
 
 	addSample('empty', 'text/plain', '');
-
-	addXHRSample('Z___dynamic', 'run-editor-sample-dynamic.txt', {
-		name: 'custom.1.',
-		tokenizer: {
-			root: [
-				[/\[error.*/, "custom-error"],
-				[/\[notice.*/, "custom-notice"],
-				[/\[info.*/, "custom-info"],
-				[/\[[a-zA-Z 0-9:]+\]/, "custom-date"],
-			],
-		}
-	});
 
 	addXHRSample('Z___f12___css', 'run-editor-sample-f12-css.txt', 'text/css');
 
