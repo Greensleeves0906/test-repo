@@ -2,13 +2,13 @@
 define(['require'], function (require) {
 
 	var container = document.getElementById('container');
+	const newContainer = document.getElementById('new-container');
 
 	var original = monaco.editor.createModel(getOriginalStr(), 'javascript');
 	var modified = monaco.editor.createModel(getModifiedStr(), 'javascript');
 
-	var diffEditor = monaco.editor.createDiffEditor(container, {
+	const diffEditor = monaco.editor.createDiffEditor(container, {
 	});
-
 	diffEditor.setModel({
 		original: original,
 		modified: modified
