@@ -1,4 +1,4 @@
-/// <reference path="../node_modules/monaco-editor-core/monaco.d.ts" />
+// i change this line for conflicts
 define(['./samples-all.generated'], function(ALL_SAMPLES) {
 
 var XHR_SAMPLES = {};
@@ -73,6 +73,15 @@ var actions = (function() {
 		}
 	];
 })();
+
+var testA = '';
+var testB = ''
+
+function testFuc () {
+	let play = 'test code';
+	document.getElementById('#testcode').style = 'background: #fff;';
+	return a;
+}
 
 var panelContainer = document.getElementById('control');
 var editorContainer = document.getElementById('editor');
